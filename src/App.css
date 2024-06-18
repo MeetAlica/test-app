@@ -21,3 +21,36 @@
 .App-link {
   color: #61dafb;
 }
+
+.loginContainer {
+  width: 500px;
+  padding: 1em;
+  border: 1px solic white;
+  border-radius: 5px;
+}
+
+.inputStyle {
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  box-sizing: border-box;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 0.5em;
+  background-color: #2da83e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.loginButton:hover {
+  background-color: #20792c;
+}
+
+.loginButton:active {
+  background-color: #13491a;
+}
