@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 interface User {
   id: number;
@@ -11,16 +10,14 @@ const UserList: React.FC = () => {
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get<User[]>('/api/users');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Failed to fetch users', error);
-      }
-    };
+    const users = [
+      { id: 1, name: 'John Doe' },
+      { id: 2, name: 'Jane Smith' },
+      { id: 3, name: 'Alice Johnson' },
+      { id: 4, name: 'Robert Brown' },
+    ];
 
-    fetchUsers();
+    setUsers(users);
   }, []);
 
   const filteredUsers = users.filter((user) =>
@@ -28,16 +25,19 @@ const UserList: React.FC = () => {
   );
 
   return (
-    <div>
+    <div className="filterContainer">
       <input
         type="text"
         placeholder="Szűrés név szerint..."
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
+        className="filterInput"
       />
-      <ul>
+      <ul className="resultsContainer">
         {filteredUsers.map((user) => (
-          <li key={user.id}>{user.name}</li>
+          <li key={user.id} className="resultItem">
+            {user.name}
+          </li>
         ))}
       </ul>
     </div>
