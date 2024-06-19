@@ -7,3 +7,4 @@
 7. Módosítottam a UserList komponenst, hogy ne APIról várja az adatokat, hanem statikusan vittem be a user adatokat.
 8. A useApi fájlban kijavítottam a hibakezelést.
 9. A useApi fájlban kijavítottam a header beállítást.
+10. Létrehoztam a dockerfile-t, és feltöltöttem a docker image-t a hub-ra.
