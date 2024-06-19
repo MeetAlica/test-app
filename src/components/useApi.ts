@@ -30,15 +30,16 @@ export const useApi = (): Api => {
           url,
           addAuthorizationHeader(options || {}, getToken()),
         );
+        if (response.status === 401) {
+          clearTokens();
+          navigate('/');
+          throw new Error('Unauthorized');
+        }
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return (await response.json()) as ResultType;
       } catch (error) {
-        if (error instanceof Error && error.message === 'Unauthorized') {
-          clearTokens();
-          navigate('/login');
-        }
         toast.error('Failed to fetch data');
         throw error;
       }
@@ -53,21 +54,25 @@ export const useApi = (): Api => {
       options?: RequestInit,
     ): Promise<ResultType> => {
       try {
+        const headers = {
+          ...addJsonHeaders(options || {}),
+          ...addAuthorizationHeader(options || {}, getToken()),
+        };
         const response = await fetch(url, {
           method: 'POST',
           body: JSON.stringify(body),
-          ...addJsonHeaders(options || {}),
-          ...addAuthorizationHeader(options || {}, getToken()),
+          ...headers,
         });
+        if (response.status === 401) {
+          clearTokens();
+          navigate('/');
+          throw new Error('Unauthorized');
+        }
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return (await response.json()) as ResultType;
       } catch (error) {
-        if (error instanceof Error && error.message === 'Unauthorized') {
-          clearTokens();
-          navigate('/login');
-        }
         toast.error('Failed to fetch data');
         throw error;
       }
