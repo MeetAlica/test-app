@@ -8,3 +8,5 @@
 8. A useApi fájlban kijavítottam a hibakezelést.
 9. A useApi fájlban kijavítottam a header beállítást.
 10. Létrehoztam a dockerfile-t, és feltöltöttem a docker image-t a hub-ra.
+11. A UserList komponensben kicseréltem a filterezést Typeahead-re.
+12. Megoldottam, hogy csak bejelentkezés után legyen látható a UserList.
