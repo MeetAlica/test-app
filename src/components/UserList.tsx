@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 interface User {
@@ -9,17 +10,22 @@ interface User {
 const UserList: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [selection, setSelection] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const usersData = [
-      { id: 1, name: 'John Doe' },
-      { id: 2, name: 'Jane Smith' },
-      { id: 3, name: 'Alice Johnson' },
-      { id: 4, name: 'Robert Brown' },
-    ];
+    if (sessionStorage.getItem('token') !== 'példatoken') {
+      navigate('/');
+    } else {
+      const usersData = [
+        { id: 1, name: 'John Doe' },
+        { id: 2, name: 'Jane Smith' },
+        { id: 3, name: 'Alice Johnson' },
+        { id: 4, name: 'Robert Brown' },
+      ];
 
-    setUsers(usersData);
-  }, []);
+      setUsers(usersData);
+    }
+  }, [navigate]);
 
   const handleSelectionChange = (selected: any) => {
     setSelection(selected);

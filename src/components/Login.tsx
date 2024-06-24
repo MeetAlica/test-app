@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -9,8 +10,9 @@ const Login: React.FC = () => {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
+
     if (username === 'admin' && password === 'password') {
-      toast.success('Login was successful!');
+      sessionStorage.setItem('token', 'példatoken');
       navigate('/UserList');
     } else {
       toast.error('Wrong username or password!');
